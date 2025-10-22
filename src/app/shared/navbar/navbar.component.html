@@ -38,36 +38,13 @@
           </h3>
         </div>
         <ul class="pr-12 xl:flex items-center h-full hidden font-medium">
+          @for (menuOption of menuOptions; track $index) {
           <li
             class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-5 tracking-normal"
             routerLinkActive="border-b-3 border-indigo-700">
-            <a routerLink="home" >Home</a>
+            <a [routerLink]="menuOption.route" >{{ menuOption.label }}</a>
           </li>
-          <li
-            class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-5 tracking-normal"
-            routerLinkActive="border-b-3 border-indigo-700">
-            <a routerLink="counter" >Counter</a>
-          </li>
-          <li
-            class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-5 tracking-normal"
-            routerLinkActive="border-b-3 border-indigo-700">
-            <a routerLink="strutural-directives" >Structural Directives</a>
-          </li>
-            <li
-            class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-5 tracking-normal"
-            routerLinkActive="border-b-3 border-indigo-700">
-            <a routerLink="attribute-directives" >Attribute Directives</a>
-          </li>
-            <li
-            class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-5 tracking-normal"
-            routerLinkActive="border-b-3 border-indigo-700">
-            <a routerLink="data-binding" >Data Binding</a>
-          </li>
-            <li
-            class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-5 tracking-normal"
-            routerLinkActive="border-b-3 border-indigo-700">
-            <a routerLink="service" >service</a>
-          </li>
+        }
         </ul>
       </div>
     </div>

@@ -1,0 +1,113 @@
+<div class="space-y-12">
+  <div class="border-b border-gray-900/10 pb-12">
+    <h2 class="text-base/7 font-semibold text-gray-900"> {{title}} </h2>
+  </div>
+
+  <div class="border-b border-gray-900/10 pb-12">
+
+    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+      <!-- DATA INPUT -->
+      <div class="sm:col-span-3">
+        <label for="task-name" class="block text-sm/6 font-medium text-gray-900">Curso</label>
+        <div class="mt-2">
+          <input id="task-name" type="text" name="task-name" autocomplete="given-task.name" class="block w-full rounded-md bg-white px-4 py-4 text-base text-gray-900
+            outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
+            focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" #txtName
+            (input)="text_name.set(txtName.value)" [value]="text_name()" />
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="task-name" class="block text-sm/6 font-medium text-gray-900">Duracion</label>
+          <div class="mt-2">
+            <input id="task-name" type="text" name="task-name" autocomplete="given-task.name" class="block w-full rounded-md bg-white px-4 py-4 text-base text-gray-900
+            outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
+            focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" #txtDuracion
+              (input)="text_duracion.set(txtDuracion.value)" [value]="text_duracion()" />
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="task-name" class="block text-sm/6 font-medium text-gray-900">Nivel</label>
+            <div class="mt-2">
+              <input id="task-name" type="text" name="task-name" autocomplete="given-task.name" class="block w-full rounded-md bg-white px-4 py-4 text-base text-gray-900
+            outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
+            focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" #txtNivel
+                (input)="text_nivel.set(txtNivel.value)" [value]="text_nivel()" />
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="task-name" class="block text-sm/6 font-medium text-gray-900">Cuatrimestre</label>
+              <div class="mt-2">
+                <input id="task-name" type="text" name="task-name" autocomplete="given-task.name" class="block w-full rounded-md bg-white px-4 py-4 text-base text-gray-900
+            outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
+            focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" #txtCuatri
+                  (input)="text_cuatrimestre.set(txtCuatri.value)" [value]="text_cuatrimestre()" />
+              </div>
+
+              <div class="mt-2">
+                <p class="text-sm  text-red-600"> {{messageError()}} </p>
+              </div>
+              <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button type="button" class="text-sm/6 font-semibold text-gray-900"
+                  (click)="resetCurses()">Cancel</button>
+                <button type="button" (click)="addCurse()"
+                  class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  {{ editingId() ? 'Update' : 'Save' }}
+                </button>
+              </div>
+              <!-- END DATA INPUT -->
+
+
+              <div class="sm:col-span-3">
+                <label for="last-name" class="block text-sm/6 font-medium text-gray-900">All my curses</label>
+                <div class="mt-5">
+
+                  <!--IF-->
+                  @if(curses().length === 0){
+                  <p class="text-sm text-gray-500">No curses yet</p>
+                  <!-- END IF-->
+                  } @else {
+                  <!--ELSE-->
+                  <ul class="space-y-2">
+                    <!-- FOR-->
+                    @for (curse of curses(); track curse.id) {
+                    <li class="px-3 py-1.5 rounded-lg shadow-md flex justify-between items-center
+              bg-white hover:bg-gray-100 transition">
+                      <span class="text-gray-800">
+                        <!-- TASK NAME -->
+                        curso: {{curse.name}}
+                        duracion:{{curse.duracion}}
+                        nivel: {{curse.nivel}}
+                        cuatrimestre :{{curse.cuatrimestre}}
+                      </span>
+
+                      <button type="button"
+                        class="p-2 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        aria-label="Delete task" title="Delete task" (click)="deleteCurse(curse.id)">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.166L19.5 19.5A2.25 2.25 0 0 1 17.25 21H6.75A2.25 2.25 0 0 1 4.5 19.5L3.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .563c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916A1.125 1.125 0 0 0 12.943 3h-1.886a1.125 1.125 0 0 0-1.116.99v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                        </svg>
+                      </button>
+
+                      <button type="button"
+                        class="p-2 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        aria-label="updateCurse" title="updateCurse" (click)="updateCurse(curse.id)">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.166L19.5 19.5A2.25 2.25 0 0 1 17.25 21H6.75A2.25 2.25 0 0 1 4.5 19.5L3.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .563c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916A1.125 1.125 0 0 0 12.943 3h-1.886a1.125 1.125 0 0 0-1.116.99v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                        </svg>
+                      </button>
+                    </li>
+                    }
+                    <!-- END FOR-->
+                  </ul>
+                  }
+                  <!-- END ELSE-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
